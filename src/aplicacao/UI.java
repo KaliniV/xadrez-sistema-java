@@ -8,6 +8,7 @@ public class UI {
 		
 		for (int linha=0; linha <pecas.length; linha++) {
 			System.out.print((8-linha) + " ");
+			
 			for(int coluna=0; coluna < pecas.length; coluna++) {
 				imprimirPeca(pecas[linha][coluna]);
 			}
@@ -17,7 +18,7 @@ public class UI {
 	}
 	private static void imprimirPeca(Peca_de_xadrez peca) {
 		if (peca == null) {
-			System.out.print("▪︎");
+			System.out.print("▪");
 		}
 		else {
 			System.out.print(peca);
