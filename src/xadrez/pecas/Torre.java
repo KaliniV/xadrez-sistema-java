@@ -11,12 +11,7 @@ public class Torre extends Peca_de_xadrez{
 	}
 	@Override 
 	public String toString() {
-		if(getCor() == Cor.BRANCO)  {
-			return "♖";
-		}
-		else {
 		return "♜";
-		}
 	}
 
 }
