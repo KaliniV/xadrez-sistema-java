@@ -11,7 +11,7 @@ public class Rei extends Peca_de_xadrez {
 	}
 	@Override 
 	public String toString() {
-		return "♚";
+		return "R";
 
 	}
 
