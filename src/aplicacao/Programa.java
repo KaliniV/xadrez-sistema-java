@@ -13,9 +13,8 @@ public class Programa {
 		Scanner sc = new Scanner (System.in);
 		Partida_de_xadrez partida_de_xadrez = new Partida_de_xadrez();
 		
-		
-		
 		while(true) {
+			UI.clearScreen();
 		UI.imprimirTabuleiro(partida_de_xadrez.pegarPecas());
 		System.out.println();
 		System.out.print("Origem: ");
