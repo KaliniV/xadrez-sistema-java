@@ -25,6 +25,7 @@ public class Programa {
 			Posicao_xadrez origem = UI.leiaAPosicaoDoXadrez(sc);
 			
 			boolean [][] movimentosPossiveis = partida_de_xadrez.movimentosPossiveis(origem);
+		
 			UI.clearScreen();
 			UI.imprimirTabuleiro(partida_de_xadrez.pegarPecas(), movimentosPossiveis);
 			
