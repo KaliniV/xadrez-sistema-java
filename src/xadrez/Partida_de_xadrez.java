@@ -8,20 +8,28 @@ import xadrez.pecas.Torre;
 
 public class Partida_de_xadrez {
 	
+	
+	private int vez;
+	private Cor jogadorAtual;
 	private Tabuleiro tabuleiro;
 	
 	public Partida_de_xadrez() {
 		tabuleiro = new Tabuleiro(8, 8);
+		vez = 1;
+		jogadorAtual = Cor.BRANCO;
 		configuracaoInicial();
 	}
-	
+	public int getVez() {
+		return vez;
+	}
+	public Cor getJogadorAtual() {
+		return jogadorAtual;
+	}
+
 	public  Peca_de_xadrez[][] pegarPecas(){
 		Peca_de_xadrez [][] matriz = new Peca_de_xadrez [tabuleiro.getLinhas()][tabuleiro.getColunas()];
-		
-		for (int linha=0; linha <tabuleiro.getLinhas(); linha++) {
-			
+		for (int linha=0; linha <tabuleiro.getLinhas(); linha++) {	
 			for(int coluna=0; coluna < tabuleiro.getColunas(); coluna++) {
-				
 				matriz[linha][coluna] = (Peca_de_xadrez)tabuleiro.peca(linha, coluna);
 			}
 		}
@@ -34,13 +42,13 @@ public class Partida_de_xadrez {
 		return  tabuleiro.peca(posicao).movimentosPossiveis();
 	}
 	
-	
 	public Peca_de_xadrez executarMovimentoDeXadrez(Posicao_xadrez posicaoDeOrigem, Posicao_xadrez posicaoDeDestino) {
 		Posicao origem = posicaoDeOrigem.posicionar();
 		Posicao destino = posicaoDeDestino.posicionar();
 		validarPosicaoDeOrigem(origem);
 		validarPosicaoDeDestino(origem, destino);
 		Peca pecaCapturada = FazerMover(origem, destino);
+		proximaVez();
 		return (Peca_de_xadrez) pecaCapturada;
 	}
 	private Peca FazerMover(Posicao origem, Posicao destino) {
@@ -54,6 +62,9 @@ public class Partida_de_xadrez {
 		if (!tabuleiro.temAPeca(posicao)) {
 			throw new XadrezException("Não há nenhuma peça na posição de origem");
 		}
+		if(jogadorAtual != ((Peca_de_xadrez)tabuleiro.peca(posicao)).getCor()) {
+			throw new XadrezException("A peça escolhida não é sua.");	
+		}
 		if(!tabuleiro.peca(posicao).existeAlgumMovimentoPossivel()) {
 			throw new XadrezException("Não há movimentos possíveis para a peça escolhida");	
 		}
@@ -65,7 +76,10 @@ public class Partida_de_xadrez {
 		}
 	}
 	
-	
+	private void proximaVez() {
+		vez++;
+		jogadorAtual = (jogadorAtual == Cor.BRANCO) ? Cor.PRETO : Cor.BRANCO;
+	}
 	
 	private void novoLugarPeca( char coluna, int linha, Peca_de_xadrez peca) {
 		tabuleiro.lugarDaPeca(peca, new Posicao_xadrez(coluna, linha).posicionar() );
